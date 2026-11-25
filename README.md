@@ -1,217 +1,217 @@
 # 🎓 MSRIT AI Campus Policy Discovery Assistant
-### Dell Technologies Campus Hackathon 2024 — Problem Statement 1
+### Enterprise Policy Discovery Engine for Autonomous Regulations
 
-> **Bridging the gap between student slang and bureaucratic policy jargon using Multi-HyDE Hybrid RAG, A2A Orchestration, and FastMCP.**
+> **Bridging the vocabulary gap between casual student language and formal statutory university regulations using Multi-HyDE Hybrid RAG, Dual-Layer Guardrails, and FastMCP Agent-to-Agent Compliance.**
 
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![Streamlit](https://img.shields.io/badge/streamlit-1.35+-red.svg)](https://streamlit.io)
-[![Qdrant](https://img.shields.io/badge/qdrant-local-green.svg)](https://qdrant.tech)
+[![Qdrant](https://img.shields.io/badge/qdrant-embedded-green.svg)](https://qdrant.tech)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
 
-## 🏗️ Architecture
+## 📌 Executive Overview
+
+Students frequently struggle to navigate dense institutional handbooks. When a student asks a casual or hypothetical question (*"My band has a gig next Friday, can I skip my lab and make it up later?"*), standard search tools fail because official regulations use dense academic terminology (*"Intermittent Academic Accommodations under Clause 10.1"*). Generic LLMs, on the other hand, often hallucinate false permissions without source grounding.
+
+This system provides a production-grade, zero-hallucination solution that:
+1. **Translates** informal student inquiries into formal statutory hypotheses using **Multi-Hypothesis HyDE**.
+2. **Retrieves** verified policy clauses via a **Three-Tier Hybrid Engine** (Dense vector search + Sparse BM25 + Reciprocal Rank Fusion + FlashRank Cross-Encoder reranking).
+3. **Guarantees safety** through **Dual-Layer Guardrails** (pre-LLM prompt injection filtering and a 0.60 confidence gate that deterministically refuses uncodified topics).
+4. **Executes compliance actions** via **FastMCP Agent-to-Agent (A2A)** tools to check student eligibility against attendance floors and generate official petitions.
+5. **Advises alternative paths** through a counterfactual **What-If Engine** (surfacing Summer Remedial Semesters under Addendum 21.2 for debarment risks).
+
+---
+
+## 🏗️ System Architecture
 
 ```mermaid
-flowchart TD
-    subgraph INPUT["Student Input"]
-        Q[/"Student Query\n'My band has a gig, can I skip lab?'"/]
+flowchart LR
+    subgraph INPUT["① Input Layer"]
+        U["🎓 Student Query\n'Can I skip lab for band gig?'"]
+        G1["🛡️ Layer 1 Guardrail\nPrompt Injection Filter"]
+        U --> G1
     end
 
-    subgraph GUARD1["🛡️ Layer 1: Input Guardrail"]
-        IG{Injection /\nOOD Check}
-        BLOCK1[/"⛔ Blocked\n'Prompt injection detected'"/]
+    subgraph HYDE["② Multi-HyDE Engine"]
+        H1["Hypothesis 1\nRegistrar Lens"]
+        H2["Hypothesis 2\nExamination Controller"]
+        G1 -->|"✅ Clean"| H1
+        G1 -->|"✅ Clean"| H2
     end
 
-    subgraph HYDE["🧪 Multi-Hypothesis HyDE Engine"]
-        H1["Hypothesis 1\n'Under Clause 2.1, students\nrepresenting institution...'"]
-        H2["Hypothesis 2\n'As per Clause 3.1,\nmakeup lab examinations...'"]
+    subgraph RETRIEVAL["③ Hybrid Retrieval"]
+        V["Qdrant Vector DB\n(BAAI/bge-small-en-v1.5)"]
+        B["BM25Okapi Index\n(103 Statutory Clauses)"]
+        RRF["RRF Fusion (k=60)\n+ FlashRank Cross-Encoder"]
+        H1 --> V
+        H2 --> V
+        H1 --> B
+        H2 --> B
+        V --> RRF
+        B --> RRF
     end
 
-    subgraph HYBRID["🔍 Hybrid Retrieval"]
-        DE["Dense Search\nQdrant + BAAI/bge-small-en-v1.5\n(fastembed)"]
-        SP["Sparse Search\nBM25Okapi\n(rank-bm25)"]
-        RRF["⚡ RRF Fusion\nReciprocal Rank Fusion"]
-        CE["Cross-Encoder Reranker\nFlashRank ms-marco-MiniLM\nTop-8 → Top-3"]
+    subgraph GATE["④ Confidence Gate"]
+        CG{"Score ≥ 0.60?"}
+        RRF --> CG
     end
 
-    subgraph GUARD2["🛡️ Layer 2: Confidence Gate"]
-        CG{Score ≥ 0.60?}
-        BLOCK2[/"⛔ Policy Not Found\nEscalate to Dean's Office"/]
+    subgraph AGENT["⑤ Agent Layer"]
+        PA["Policy Discovery Agent\n(Grounded Synthesis)"]
+        CA["Compliance Agent\n(FastMCP Tools)"]
+        WI["What-If Counterfactual\nAdvisor"]
+        CG -->|"✅ Pass"| PA
+        PA --> CA
+        PA --> WI
     end
 
-    subgraph SYNTHESIS["✍️ Grounded Synthesis"]
-        SY["LLM Answer Generation\nQwen 2.5-7B / Groq / Gemini\nREAL chunks ONLY — zero HyDE leakage"]
-        CF["💡 Counterfactual What-If\nMinimal condition advisor\nif student ineligible"]
+    subgraph OUTPUT["⑥ Output"]
+        ANS["📋 Verified Ruling\n+ Clause Citations"]
+        PET["📄 Official Petition (.txt)"]
+        REF["⛔ Deterministic Refusal\n(Low Confidence)"]
+        CA --> ANS
+        CA --> PET
+        CG -->|"❌ Fail"| REF
     end
 
-    subgraph AUDIT["🔬 Output Audit"]
-        OA["Leakage Verifier\nReal Grounding % | HyDE Leakage: 0%\nClause citation check"]
-    end
-
-    subgraph A2A["🤝 A2A: Compliance Agent via FastMCP"]
-        CE2["check_student_eligibility\nAttendance + backlog lookup"]
-        DP["draft_official_petition\nClause-cited HOD letter"]
-    end
-
-    subgraph UI["📺 Streamlit Engineering X-Ray UI"]
-        L["Left: Student Response\n+ MCP Action Card\n+ What-If Box"]
-        R["Right: HyDE Diff | Guardrails\n| Latency Telemetry"]
-    end
-
-    Q --> IG
-    IG -->|blocked| BLOCK1
-    IG -->|pass| H1
-    IG -->|pass| H2
-    H1 --> DE
-    H2 --> DE
-    Q --> DE
-    Q --> SP
-    DE --> RRF
-    SP --> RRF
-    RRF --> CE
-    CE --> CG
-    CG -->|fail| BLOCK2
-    CG -->|pass| SY
-    SY --> CF
-    CF --> OA
-    OA --> A2A
-    A2A --> CE2
-    A2A --> DP
-    OA --> L
-    A2A --> L
-    H1 --> R
-    H2 --> R
-    CE --> R
-    OA --> R
+    style INPUT fill:#0f172a,stroke:#0076CE,color:#F3F4F6
+    style HYDE fill:#0f172a,stroke:#7c3aed,color:#F3F4F6
+    style RETRIEVAL fill:#0f172a,stroke:#0891b2,color:#F3F4F6
+    style GATE fill:#0f172a,stroke:#d97706,color:#F3F4F6
+    style AGENT fill:#0f172a,stroke:#059669,color:#F3F4F6
+    style OUTPUT fill:#0f172a,stroke:#0076CE,color:#F3F4F6
 ```
 
-## ✨ Key Differentiators
+---
 
-| Feature | Standard RAG | This System |
+## ✨ Key Technical Innovations
+
+| Component | Standard Implementation | This Architecture |
 |---|---|---|
-| Vocabulary bridging | ❌ Keyword match fails | ✅ Multi-HyDE persona translation |
-| Retrieval | Dense only | ✅ Dense + BM25 + RRF + Cross-encoder |
-| Hallucination guard | ❌ None | ✅ Dual-layer + leakage audit |
-| Privacy | Cloud API required | ✅ Self-hosted Qwen 2.5-7B option |
-| Action | Answer only | ✅ FastMCP → eligibility + petition |
-| Edge cases | ❌ Hallucination | ✅ Confidence gate → official refusal |
-| What-If analysis | ❌ None | ✅ Minimal condition counterfactual |
+| **Semantic Bridging** | Raw query embedded directly | **Multi-HyDE**: Dual bureaucratic hypotheses (Registrar & Controller of Examinations lenses) |
+| **Retrieval Strategy** | Dense-only search | **Hybrid RAG**: Dense (Qdrant) + Lexical (BM25Okapi) $\to$ RRF ($k=60$) $\to$ FlashRank Cross-Encoder |
+| **Hallucination Control** | System prompt instructions | **Architectural Isolation**: 0.0% HyDE assumption leakage; synthetic hypotheses are strictly quarantined from synthesis |
+| **Edge-Case Handling** | LLM guesses uncodified topics | **Layer 2 Confidence Gate**: Relevance score $< 0.60$ triggers deterministic refusal (e.g. pets in labs) |
+| **Security** | None or simple keyword filter | **Layer 1 Input Guardrail**: Intercepts injections & roleplay attacks at boundary (0 GPU tokens consumed) |
+| **Agentic Action** | Conversational responses only | **FastMCP (A2A)**: Evaluates student database records & auto-drafts formal, signature-ready petitions |
+| **Academic Guidance** | Static policy citation | **Counterfactual What-If Advisor**: Identifies minimal qualifying conditions and remedial pathways |
+
+---
+
+## 📈 Quantitative Benchmark Results
+
+Evaluated across an institutional benchmark of **20 verified academic queries** plus **4 adversarial trap queries** from the MSRIT Autonomous Regulations:
+
+| Evaluation Metric | Raw Dense Baseline | Multi-HyDE Hybrid RAG | Absolute Gain | Status |
+|:---|:---:|:---:|:---:|:---:|
+| **Recall@1** | 0.750 | **0.950** | **+20.0%** | Significant Precision Lift |
+| **Recall@3** | 0.800 – 0.950 | **1.000** | **+5.0% to +20.0%** | **100% Perfect Coverage** |
+| **Mean Reciprocal Rank (MRR)** | 0.842 | **0.975** | **+0.133** | Correct Clause at Rank 1 |
+| **HyDE Assumption Leakage** | N/A | **0.00%** | — | Verified Architectural Isolation |
+| **Prompt Injection Interception** | 0% (vulnerable) | **100.0%** | — | Blocked at Pre-LLM Boundary |
+| **Uncodified Policy Refusal** | 0% (hallucinates) | **100.0%** | — | Intercepted by 0.60 Confidence Gate |
+
+---
+
+## 📁 Repository Structure
+
+```text
+├── .env.example                          # Environment variable configuration template
+├── .gitignore                            # Standardized git exclusions (secrets, caches, local files)
+├── .streamlit/
+│   └── config.toml                       # Dell enterprise dark-mode theme configuration
+├── benchmark/
+│   ├── evaluate_hyde.py                  # Benchmark harness (evaluates Recall@1, Recall@3, MRR)
+│   ├── results.json                      # Empirical test benchmark results
+│   ├── retrieval_comparison.png          # Visual benchmark comparison chart
+│   └── test_queries.json                 # 24 standardized test cases & ground truths
+├── data/
+│   ├── msrit_policy_handbook.md          # 103 codified statutory clauses (21 chapters)
+│   └── students_db.json                  # Sample test student compliance profiles
+├── qdrant_storage_msrit/                 # Embedded Qdrant vector database & BM25 pickle
+├── src/
+│   ├── agent_workflow.py                 # Policy Discovery & Compliance Orchestrator
+│   ├── guardrails.py                     # Layer 1 injection filter + Layer 2 confidence gate
+│   ├── hyde_retriever.py                 # Multi-HyDE + BM25 + FlashRank Cross-Encoder reranker
+│   ├── ingestion.py                      # Handbook chunking & vector ingestion pipeline
+│   └── mcp_server.py                     # FastMCP tool suite (eligibility & petition drafter)
+├── app.py                                # Streamlit production web application
+├── kaggle_server.py                      # Self-hosted Ollama + dual-T4 GPU inference script
+└── requirements.txt                      # Pinned production dependencies
+```
+
+---
 
 ## 🚀 Quick Start
 
-### Prerequisites
-- Python 3.11+
-- 4GB free disk (for embedding models)
-- Optional: Qwen 2.5-7B on Kaggle (see below) or any Groq/Gemini API key
+### 1. Prerequisites
+- Python 3.11 or higher
+- 4 GB free disk space (for local FastEmbed & Cross-Encoder models)
 
-### 1. Clone & Install
+### 2. Installation
 ```bash
-cd Dell
+git clone https://github.com/<your-username>/<your-repo-name>.git
+cd <your-repo-name>
 pip install -r requirements.txt
 ```
 
-### 2. Configure Environment
+### 3. Environment Configuration
+Copy the configuration template to `.env`:
 ```bash
 cp .env.example .env
-# Edit .env with your LLM API key (or leave as-is for offline embedding-only mode)
 ```
+Default parameters in `.env`:
+```env
+LLM_BASE_URL=https://cornstalk-prescribe-propeller.ngrok-free.dev/v1
+LLM_MODEL_NAME=qwen3.8:27b
+LLM_API_KEY=ollama
+QDRANT_PATH=./qdrant_storage_msrit
+QDRANT_COLLECTION=msrit_policies
+CONFIDENCE_THRESHOLD=0.60
+TOP_K_RERANK=8
+FINAL_TOP_K=3
+```
+> **Note on Offline Resilience:** If no remote LLM server is active, the application automatically operates in **Deterministic Offline Fallback Mode**—answering queries with 100% real policy grounding directly from retrieved statutory clauses.
 
-### 3. Ingest Knowledge Base
+### 4. Knowledge Base Ingestion (Optional)
+The repository includes a pre-indexed `qdrant_storage_msrit/` directory. To re-index the handbook from scratch:
 ```bash
 python src/ingestion.py
-# Output: Qdrant collection with 103 official MSRIT policy chunks + BM25 index
-# First run downloads BAAI/bge-small-en-v1.5 (~130MB, one-time)
 ```
 
-### 4. Run Benchmark (Optional)
-```bash
-python benchmark/evaluate_hyde.py
-# Generates benchmark/results.json + benchmark/retrieval_comparison.png
-# Benchmarked Results:
-# - Recall@1: Baseline: 0.750  --> Multi-HyDE Hybrid: 0.950 (+20.0%)
-# - Recall@3: Baseline: 0.800  --> Multi-HyDE Hybrid: 1.000 (100% Perfect)
-# - MRR:      Baseline: 0.842  --> Multi-HyDE Hybrid: 0.975 (+13.3%)
-# - Avg Latency: 643 ms
-```
-
-### 5. Launch the App
+### 5. Running the Web Application
+Launch the Streamlit user interface:
 ```bash
 streamlit run app.py
 ```
+Open your browser at `http://localhost:8501`.
 
 ---
 
-## 🌐 Connecting a Kaggle Qwen 2.5-7B Tunnel
+## ⚡ Self-Hosted GPU Inference (Kaggle Dual-T4 Setup)
 
-For 100% campus data privacy and zero per-token cost, run Qwen 2.5-7B on Kaggle's free T4 GPU:
+For complete campus data privacy and zero API token cost, the foundation model can be self-hosted on dual NVIDIA Tesla T4 GPUs on Kaggle:
 
-1. **Open the Kaggle Notebook**: Upload `kaggle_qwen_server.ipynb`
-2. **Enable GPU**: Settings → Accelerator → T4 GPU
-3. **Run all cells** — the notebook launches an OpenAI-compatible vLLM/Ollama server with a secure Cloudflare tunnel URL
-4. **Update your `.env`**:
-   ```bash
-   LLM_BASE_URL=https://your-tunnel.trycloudflare.com/v1
-   LLM_MODEL_NAME=Qwen/Qwen2.5-7B-Instruct
-   LLM_API_KEY=not-needed-for-local
-   ```
-5. Restart the Streamlit app — the sidebar displays "🟢 Qwen-2.5-7B Self-Hosted".
-
-**Fallback (1-line swap):** Change `LLM_BASE_URL` to `https://api.groq.com/openai/v1`, set `LLM_API_KEY` to your Groq key, and `LLM_MODEL_NAME` to `llama-3.1-8b-instant`.
+1. Create a Kaggle notebook with **GPU T4 x2** accelerator and **Internet = On**.
+2. Run the provided [kaggle_server.py](kaggle_server.py) script.
+3. The script configures `OLLAMA_FLASH_ATTENTION=1`, `OLLAMA_KV_CACHE_TYPE=q8_0`, launches Ollama with `qwen3.8:27b`, and tunnels the API securely using ngrok with `--host-header=rewrite` (bypassing host-header filtering).
+4. Update `LLM_BASE_URL` in `.env` with your tunnel endpoint. The Streamlit header badge will automatically reflect **🟢 Online**.
 
 ---
 
-## 📁 Project Structure
+## 🧪 Evaluation & Benchmarking
 
-```
-Dell/
-├── data/
-│   ├── msrit_policy_handbook.md      # Official 21-chapter, 103-clause MSRIT Autonomous handbook
-│   └── students_db.json              # 4 student compliance profiles
-├── src/
-│   ├── ingestion.py                  # Regex chunker (103 clauses) → Qdrant + BM25
-│   ├── guardrails.py                 # Dual guardrails (regex injection filter + 0.60 confidence gate)
-│   ├── hyde_retriever.py             # Multi-HyDE + Hybrid RRF + FlashRank Cross-Encoder
-│   ├── mcp_server.py                 # FastMCP: Clause 10.1 eligibility + petition tools
-│   └── agent_workflow.py             # A2A orchestration & What-If engine
-├── benchmark/
-│   ├── test_queries.json             # 20 real student queries + 4 adversarial traps
-│   ├── evaluate_hyde.py              # Recall@1,3 + MRR + latency chart generator
-│   ├── results.json                  # Complete empirical metrics log
-│   └── retrieval_comparison.png      # Matplotlib benchmark comparison bar chart
-├── qdrant_storage_msrit/             # Local embedded vector store (103 points)
-├── app.py                            # Streamlit Engineering X-Ray UI
-├── requirements.txt
-├── .env
-└── README.md
+To execute the automated benchmark suite comparing raw baseline retrieval against Multi-HyDE Hybrid search:
+
+```bash
+python benchmark/evaluate_hyde.py
 ```
 
----
-
-## 📊 Rubric Alignment
-
-| Dimension | Weight | Implementation |
-|---|---|---|
-| Solutioning | 25% | End-to-end data flow, 103 real MSRIT clauses, deterministic fallbacks, air-gap resiliency |
-| Technology | 25% | Multi-HyDE, Hybrid RAG (Dense + BM25 + RRF), FlashRank Cross-Encoder, Dual Guardrails, FastMCP, A2A |
-| Reasoning | 20% | Per-stage ms telemetry, automated offline benchmark (Recall@1 = 0.950, Recall@3 = 1.000, MRR = 0.975) |
-| Innovation | 15% | Counterfactual What-If advisor (85% standard, 75% floor, DX remedy), FastMCP petition auto-drafter |
-| Presentation | 15% | Split-screen X-Ray UI, 5 one-click live pitch demo scenarios, Mermaid architecture diagram |
+The script processes all 20 test queries, logs per-query results to `benchmark/results.json`, and updates `benchmark/retrieval_comparison.png`.
 
 ---
 
-## 🎓 Evaluation Rubric Demo Scenarios
+## 📄 License
 
-Launch the app and use the **5 One-Click Demo Scenarios** in the sidebar:
-
-| # | Scenario | USN | Official MSRIT Regulation | Outcome |
-|---|---|---|---|---|
-| 1 | 🎸 Band Gig / Lab Makeup | 1MS22CS045 | Clause 10.1 & Clause 8.10 | Passed, Eligible, Petition Drafted to Principal & HOD |
-| 2 | 📉 Low Attendance (68%) | 1MS22CS089 | Clause 10.1, 10.3 & Addendum 21.2 | Ineligible ('DX' Grade Risk), What-If Summer Sem Remedy |
-| 3 | ⚠️ Hospitalization (79%) | 1MS22EC012 | Clause 10.1 (10% Principal Condonation) | Eligible with Condonation Sanction (5.6% needed) |
-| 4 | 🐕 Non-Existent Policy Trap | Guest | Uncovered Query Filter | Confidence Gate Refusal (< 0.60, zero hallucination) |
-| 5 | 🚫 Prompt Injection Attack | Guest | Regex Security Guardrail | Blocked at Layer 1 before LLM or retrieval |
-
----
-
-*Built for Dell Technologies Campus Hackathon 2024 — MSRIT Team*
+This project is licensed under the [MIT License](LICENSE).
