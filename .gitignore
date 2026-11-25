@@ -1,0 +1,48 @@
+# Python cache & bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Virtual environments
+venv/
+env/
+.venv/
+ENV/
+
+# Environment variables & secrets (NEVER commit live tokens or credentials)
+.env
+*.env.local
+
+# Local locks & process state
+*.lock
+.lock
+
+# Temporary & scratch files
+scratch/
+test_*.py
+*.tmp
+*.log
+
+# Streamlit local session state & config overrides
+.streamlit/secrets.toml
+
+# Hackathon presentation, prompt logs, & video prep scripts (internal notes)
+DEMO_VIDEO_SCRIPT.md
+demo_video_script*.md
+IN_PERSON_5MIN_PRESENTATION_AND_QA.md
+PROMPT_DOCUMENTATION.md
+PROMPT_DOCUMENTATION_FULL.md
+WALKTHROUGH.md
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE & Editor configs
+.vscode/
+.idea/
+*.swp
+*.swo

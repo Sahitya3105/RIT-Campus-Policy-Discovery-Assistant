@@ -1,0 +1,613 @@
+{
+  "timestamp": "2026-11-13T19:46:58.256111+00:00",
+  "mode": "online",
+  "num_queries": 20,
+  "baseline": {
+    "recall_at_1": 0.75,
+    "recall_at_3": 0.95,
+    "mrr": 0.8417,
+    "avg_latency_ms": 21.11
+  },
+  "hyde": {
+    "recall_at_1": 0.95,
+    "recall_at_3": 1.0,
+    "mrr": 0.975,
+    "avg_latency_ms": 642.74
+  },
+  "improvement": {
+    "recall_at_1": 0.2,
+    "recall_at_3": 0.05,
+    "mrr": 0.1333
+  },
+  "per_query": [
+    {
+      "id": "Q001",
+      "query": "Can I get attendance condonation for participating in sports or music events?",
+      "ground_truth": [
+        "Clause 10.1"
+      ],
+      "baseline": {
+        "retrieved_ids": [
+          "Clause 10.1",
+          "Clause 10.2",
+          "Clauses 19.1 \u2013 19.9"
+        ],
+        "recall_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "mrr": 1.0,
+        "latency_ms": 22.78
+      },
+      "hyde": {
+        "retrieved_ids": [
+          "Clause 10.1",
+          "Clause 10.2",
+          "Clauses 19.1 \u2013 19.9"
+        ],
+        "recall_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "mrr": 1.0,
+        "latency_ms": 887.7
+      }
+    },
+    {
+      "id": "Q002",
+      "query": "What is the minimum attendance required to write the Semester End Exam?",
+      "ground_truth": [
+        "Clause 10.1"
+      ],
+      "baseline": {
+        "retrieved_ids": [
+          "Clause 10.1",
+          "Clause 8.6",
+          "Clause 9.1 \u2013 9.2"
+        ],
+        "recall_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "mrr": 1.0,
+        "latency_ms": 65.93
+      },
+      "hyde": {
+        "retrieved_ids": [
+          "Clause 10.1",
+          "Clause 13.5 \u2013 13.8",
+          "Clause 1.15"
+        ],
+        "recall_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "mrr": 1.0,
+        "latency_ms": 915.95
+      }
+    },
+    {
+      "id": "Q003",
+      "query": "What happens if I get attendance shortage in a subject?",
+      "ground_truth": [
+        "Clause 10.3",
+        "Addendum Clause 21.2"
+      ],
+      "baseline": {
+        "retrieved_ids": [
+          "Clause 10.3",
+          "Clause 10.1",
+          "Clauses 19.1 \u2013 19.9"
+        ],
+        "recall_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "mrr": 1.0,
+        "latency_ms": 15.92
+      },
+      "hyde": {
+        "retrieved_ids": [
+          "Clause 10.3",
+          "Clause 9.6 \u2013 9.8",
+          "Clause 10.1"
+        ],
+        "recall_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "mrr": 1.0,
+        "latency_ms": 815.41
+      }
+    },
+    {
+      "id": "Q004",
+      "query": "I missed my SEE exam because of severe illness and hospitalisation, can I write make-up?",
+      "ground_truth": [
+        "Clause 8.10",
+        "Clause 9.11",
+        "Addendum Clause 21.2"
+      ],
+      "baseline": {
+        "retrieved_ids": [
+          "Clause 9.11",
+          "Clause 8.11.2",
+          "Clause 8.10 \u2013 8.11.1"
+        ],
+        "recall_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "mrr": 1.0,
+        "latency_ms": 29.11
+      },
+      "hyde": {
+        "retrieved_ids": [
+          "Clause 8.10 \u2013 8.11.1",
+          "Clause 8.11.2",
+          "Clause 12.1 \u2013 12.4"
+        ],
+        "recall_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "mrr": 1.0,
+        "latency_ms": 566.46
+      }
+    },
+    {
+      "id": "Q005",
+      "query": "I had 87% attendance and 92% CIE, but messed up my SEE and failed, can I write make-up?",
+      "ground_truth": [
+        "Clause 8.11.2",
+        "Clause 9.11",
+        "Addendum Clause 21.2"
+      ],
+      "baseline": {
+        "retrieved_ids": [
+          "Clause 8.11.2",
+          "Clause 8.10 \u2013 8.11.1",
+          "Clause 9.11"
+        ],
+        "recall_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "mrr": 1.0,
+        "latency_ms": 25.39
+      },
+      "hyde": {
+        "retrieved_ids": [
+          "Clause 8.11.2",
+          "Clause 8.10 \u2013 8.11.1",
+          "Clause 10.1"
+        ],
+        "recall_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "mrr": 1.0,
+        "latency_ms": 462.84
+      }
+    },
+    {
+      "id": "Q006",
+      "query": "Can I register for Summer Semester to clear my DX grade?",
+      "ground_truth": [
+        "Addendum Clause 21.3"
+      ],
+      "baseline": {
+        "retrieved_ids": [
+          "Addendum Clause 21.3",
+          "Addendum Clause 21.6",
+          "Clause 9.6 \u2013 9.8"
+        ],
+        "recall_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "mrr": 1.0,
+        "latency_ms": 16.98
+      },
+      "hyde": {
+        "retrieved_ids": [
+          "Addendum Clause 21.3",
+          "Addendum Clause 21.6",
+          "Clause 9.6 \u2013 9.8"
+        ],
+        "recall_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "mrr": 1.0,
+        "latency_ms": 723.29
+      }
+    },
+    {
+      "id": "Q007",
+      "query": "How many credits can I register for in the Summer Semester?",
+      "ground_truth": [
+        "Addendum Clause 21.3"
+      ],
+      "baseline": {
+        "retrieved_ids": [
+          "Clause 7.1",
+          "Addendum Clause 21.3",
+          "Clause 6.3 \u2013 6.4"
+        ],
+        "recall_at_1": 0.0,
+        "recall_at_3": 1.0,
+        "mrr": 0.5,
+        "latency_ms": 18.4
+      },
+      "hyde": {
+        "retrieved_ids": [
+          "Addendum Clause 21.3",
+          "Clause 7.1",
+          "Clause 6.3 \u2013 6.4"
+        ],
+        "recall_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "mrr": 1.0,
+        "latency_ms": 757.47
+      }
+    },
+    {
+      "id": "Q008",
+      "query": "How many backlogs am I allowed to carry from 1st year to 2nd year?",
+      "ground_truth": [
+        "Clause 13.2.1",
+        "Addendum Clause 21.5"
+      ],
+      "baseline": {
+        "retrieved_ids": [
+          "Clause 8.7",
+          "Clause 9.6 \u2013 9.8",
+          "Clause 13.2.1"
+        ],
+        "recall_at_1": 0.0,
+        "recall_at_3": 1.0,
+        "mrr": 0.3333333333333333,
+        "latency_ms": 47.06
+      },
+      "hyde": {
+        "retrieved_ids": [
+          "Addendum Clause 21.5",
+          "Clause 9.6 \u2013 9.8",
+          "Clause 13.2.1"
+        ],
+        "recall_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "mrr": 1.0,
+        "latency_ms": 827.68
+      }
+    },
+    {
+      "id": "Q009",
+      "query": "What are the requirements to be eligible for entering 4th year 7th semester?",
+      "ground_truth": [
+        "Clause 13.2.3",
+        "Addendum Clause 21.5"
+      ],
+      "baseline": {
+        "retrieved_ids": [
+          "Clause 13.2.3",
+          "Clause 6.6",
+          "Clauses 15.1 \u2013 15.6"
+        ],
+        "recall_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "mrr": 1.0,
+        "latency_ms": 18.36
+      },
+      "hyde": {
+        "retrieved_ids": [
+          "Clause 13.2.3",
+          "Clause 13.2.1",
+          "Clause 16.1"
+        ],
+        "recall_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "mrr": 1.0,
+        "latency_ms": 600.4
+      }
+    },
+    {
+      "id": "Q010",
+      "query": "What CGPA do I need to register for an Honours degree?",
+      "ground_truth": [
+        "Clause 16.1"
+      ],
+      "baseline": {
+        "retrieved_ids": [
+          "Clause 16.1",
+          "Clause 6.6",
+          "Clauses 15.1 \u2013 15.6"
+        ],
+        "recall_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "mrr": 1.0,
+        "latency_ms": 15.5
+      },
+      "hyde": {
+        "retrieved_ids": [
+          "Clause 6.6",
+          "Clause 16.1",
+          "Clauses 15.1 \u2013 15.6"
+        ],
+        "recall_at_1": 0.0,
+        "recall_at_3": 1.0,
+        "mrr": 0.5,
+        "latency_ms": 549.06
+      }
+    },
+    {
+      "id": "Q011",
+      "query": "Can I register for both Honours and Minor degree at the same time?",
+      "ground_truth": [
+        "Clause 16.0"
+      ],
+      "baseline": {
+        "retrieved_ids": [
+          "Clause 16.0",
+          "Clause 1.17",
+          "Clause 16.1"
+        ],
+        "recall_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "mrr": 1.0,
+        "latency_ms": 13.1
+      },
+      "hyde": {
+        "retrieved_ids": [
+          "Clause 16.0",
+          "Clauses 15.1 \u2013 15.6",
+          "Clause 16.1"
+        ],
+        "recall_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "mrr": 1.0,
+        "latency_ms": 648.77
+      }
+    },
+    {
+      "id": "Q012",
+      "query": "I failed a course four times, can I get exemption and choose another subject?",
+      "ground_truth": [
+        "Clause 9.9",
+        "Addendum Clause 21.9"
+      ],
+      "baseline": {
+        "retrieved_ids": [
+          "Clause 9.9",
+          "Addendum Clause 21.9",
+          "Clause 9.6 \u2013 9.8"
+        ],
+        "recall_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "mrr": 1.0,
+        "latency_ms": 16.24
+      },
+      "hyde": {
+        "retrieved_ids": [
+          "Clause 9.9",
+          "Addendum Clause 21.9",
+          "Clause 10.3"
+        ],
+        "recall_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "mrr": 1.0,
+        "latency_ms": 599.11
+      }
+    },
+    {
+      "id": "Q013",
+      "query": "What is the minimum passing marks in Continuous Internal Evaluation?",
+      "ground_truth": [
+        "Clause 9.1",
+        "Clause 8.1"
+      ],
+      "baseline": {
+        "retrieved_ids": [
+          "Clause 1.14",
+          "Clause 8.1",
+          "Clause 9.1 \u2013 9.2"
+        ],
+        "recall_at_1": 0.0,
+        "recall_at_3": 1.0,
+        "mrr": 0.5,
+        "latency_ms": 12.51
+      },
+      "hyde": {
+        "retrieved_ids": [
+          "Clause 8.1",
+          "Clause 1.14",
+          "Clause 9.1 \u2013 9.2"
+        ],
+        "recall_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "mrr": 1.0,
+        "latency_ms": 709.97
+      }
+    },
+    {
+      "id": "Q014",
+      "query": "What is the weightage between CIE and SEE in evaluation?",
+      "ground_truth": [
+        "Clause 8.1"
+      ],
+      "baseline": {
+        "retrieved_ids": [
+          "Clause 8.1",
+          "Clause 9.3",
+          "Clause 8.11.2"
+        ],
+        "recall_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "mrr": 1.0,
+        "latency_ms": 15.25
+      },
+      "hyde": {
+        "retrieved_ids": [
+          "Clause 8.1",
+          "Clause 8.11.2",
+          "Clause 8.16 \u2013 8.17"
+        ],
+        "recall_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "mrr": 1.0,
+        "latency_ms": 317.08
+      }
+    },
+    {
+      "id": "Q015",
+      "query": "Can I reject my semester results and re-do the semester?",
+      "ground_truth": [
+        "Clause 11.1"
+      ],
+      "baseline": {
+        "retrieved_ids": [
+          "Clause 11.1 \u2013 11.5",
+          "Clause 10.3",
+          "Clause 12.5 \u2013 12.8"
+        ],
+        "recall_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "mrr": 1.0,
+        "latency_ms": 12.93
+      },
+      "hyde": {
+        "retrieved_ids": [
+          "Clause 11.1 \u2013 11.5",
+          "Clause 10.3",
+          "Clause 7.3"
+        ],
+        "recall_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "mrr": 1.0,
+        "latency_ms": 531.1
+      }
+    },
+    {
+      "id": "Q016",
+      "query": "What is the maximum duration allowed to complete the B.E. degree?",
+      "ground_truth": [
+        "Clause 3.2.1"
+      ],
+      "baseline": {
+        "retrieved_ids": [
+          "Clause 3.2.1",
+          "Clause 3.1.2",
+          "Clause 3.1.1"
+        ],
+        "recall_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "mrr": 1.0,
+        "latency_ms": 14.44
+      },
+      "hyde": {
+        "retrieved_ids": [
+          "Clause 3.2.1",
+          "Clause 3.1.2",
+          "Clause 3.2.2"
+        ],
+        "recall_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "mrr": 1.0,
+        "latency_ms": 694.16
+      }
+    },
+    {
+      "id": "Q017",
+      "query": "How many AICTE activity points are mandatory for regular 4-year B.E. students?",
+      "ground_truth": [
+        "Clause 17"
+      ],
+      "baseline": {
+        "retrieved_ids": [
+          "Clause 16.2",
+          "Clause 17",
+          "Addendum Clause 21.3"
+        ],
+        "recall_at_1": 0.0,
+        "recall_at_3": 1.0,
+        "mrr": 0.5,
+        "latency_ms": 16.56
+      },
+      "hyde": {
+        "retrieved_ids": [
+          "Clause 17",
+          "Clause 16.2",
+          "Clause 3.2.1"
+        ],
+        "recall_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "mrr": 1.0,
+        "latency_ms": 802.27
+      }
+    },
+    {
+      "id": "Q018",
+      "query": "Can extraordinary students complete the B.E. programme in 3.5 years?",
+      "ground_truth": [
+        "Addendum Clause 21.3"
+      ],
+      "baseline": {
+        "retrieved_ids": [
+          "Clause 3.1.2",
+          "Clause 3.2.1",
+          "Clause 4.2"
+        ],
+        "recall_at_1": 0.0,
+        "recall_at_3": 0.0,
+        "mrr": 0.0,
+        "latency_ms": 18.7
+      },
+      "hyde": {
+        "retrieved_ids": [
+          "Addendum Clause 21.3",
+          "Clause 3.2.1",
+          "Clauses 15.1 \u2013 15.6"
+        ],
+        "recall_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "mrr": 1.0,
+        "latency_ms": 761.31
+      }
+    },
+    {
+      "id": "Q019",
+      "query": "Can a student take a temporary break of study due to prolonged illness?",
+      "ground_truth": [
+        "Clause 12.1"
+      ],
+      "baseline": {
+        "retrieved_ids": [
+          "Clause 12.1 \u2013 12.4",
+          "Clause 11.1 \u2013 11.5",
+          "Clause 12.5 \u2013 12.8"
+        ],
+        "recall_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "mrr": 1.0,
+        "latency_ms": 13.62
+      },
+      "hyde": {
+        "retrieved_ids": [
+          "Clause 12.1 \u2013 12.4",
+          "Clause 11.1 \u2013 11.5",
+          "Clause 12.5 \u2013 12.8"
+        ],
+        "recall_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "mrr": 1.0,
+        "latency_ms": 328.84
+      }
+    },
+    {
+      "id": "Q020",
+      "query": "What happens if a student is caught indulging in ragging on campus?",
+      "ground_truth": [
+        "Clause 19.1"
+      ],
+      "baseline": {
+        "retrieved_ids": [
+          "Clauses 19.1 \u2013 19.9",
+          "Clauses 18.1 \u2013 18.3",
+          "Clause 7.2"
+        ],
+        "recall_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "mrr": 1.0,
+        "latency_ms": 13.36
+      },
+      "hyde": {
+        "retrieved_ids": [
+          "Clauses 19.1 \u2013 19.9",
+          "Clauses 18.1 \u2013 18.3",
+          "Clause 7.2"
+        ],
+        "recall_at_1": 1.0,
+        "recall_at_3": 1.0,
+        "mrr": 1.0,
+        "latency_ms": 355.89
+      }
+    }
+  ]
+}

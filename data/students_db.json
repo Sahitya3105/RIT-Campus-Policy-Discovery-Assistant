@@ -1,0 +1,81 @@
+{
+  "students": {
+    "1MS22CS045": {
+      "name": "Arjun Sharma",
+      "usn": "1MS22CS045",
+      "department": "Computer Science & Engineering",
+      "semester": 5,
+      "attendance_pct": 88.5,
+      "cgpa": 8.62,
+      "backlogs": 0,
+      "backlog_credits": 0,
+      "courses": {
+        "CS501": {"name": "Machine Learning", "attendance": 89.5, "cie_marks": 42},
+        "CS502": {"name": "Computer Networks", "attendance": 87.1, "cie_marks": 39},
+        "CS503": {"name": "Operating Systems", "attendance": 88.9, "cie_marks": 44}
+      },
+      "hostel_resident": true,
+      "overnight_leaves_used": 1,
+      "proctor": "Dr. Meena Rao",
+      "hod": "Prof. Suresh Kumar"
+    },
+    "1MS22CS089": {
+      "name": "Priya Nair",
+      "usn": "1MS22CS089",
+      "department": "Computer Science & Engineering",
+      "semester": 5,
+      "attendance_pct": 71.2,
+      "cgpa": 6.84,
+      "backlogs": 0,
+      "backlog_credits": 0,
+      "courses": {
+        "CS501": {"name": "Machine Learning", "attendance": 69.4, "cie_marks": 28},
+        "CS502": {"name": "Computer Networks", "attendance": 73.0, "cie_marks": 31},
+        "CS503": {"name": "Operating Systems", "attendance": 71.2, "cie_marks": 27}
+      },
+      "hostel_resident": false,
+      "overnight_leaves_used": 0,
+      "proctor": "Dr. Meena Rao",
+      "hod": "Prof. Suresh Kumar"
+    },
+    "1MS22EC012": {
+      "name": "Rahul Verma",
+      "usn": "1MS22EC012",
+      "department": "Electronics & Communication Engineering",
+      "semester": 5,
+      "attendance_pct": 79.4,
+      "cgpa": 7.45,
+      "backlogs": 0,
+      "backlog_credits": 0,
+      "courses": {
+        "EC501": {"name": "VLSI Design", "attendance": 78.5, "cie_marks": 36},
+        "EC502": {"name": "Digital Signal Processing", "attendance": 81.0, "cie_marks": 38},
+        "EC503": {"name": "Embedded Systems", "attendance": 78.7, "cie_marks": 35}
+      },
+      "hostel_resident": true,
+      "overnight_leaves_used": 0,
+      "proctor": "Dr. Anand Krishnan",
+      "hod": "Prof. Lakshmi Devi"
+    },
+    "1MS22IS034": {
+      "name": "Sneha Reddy",
+      "usn": "1MS22IS034",
+      "department": "Information Science & Engineering",
+      "semester": 5,
+      "attendance_pct": 86.0,
+      "cgpa": 7.91,
+      "backlogs": 1,
+      "backlog_credits": 4,
+      "backlog_subjects": ["IS401 - Database Management Systems (4 Credits)"],
+      "courses": {
+        "IS501": {"name": "Artificial Intelligence", "attendance": 87.2, "cie_marks": 40},
+        "IS502": {"name": "Web Technologies", "attendance": 85.0, "cie_marks": 37},
+        "IS503": {"name": "Software Engineering", "attendance": 85.8, "cie_marks": 41}
+      },
+      "hostel_resident": true,
+      "overnight_leaves_used": 2,
+      "proctor": "Dr. Vijay Prakash",
+      "hod": "Prof. Ramesh Babu"
+    }
+  }
+}
